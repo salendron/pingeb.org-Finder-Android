@@ -1,35 +1,26 @@
 package at.theengine.android.pingeborgar.sensors;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
 import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
-import at.theengine.android.pingeborgar.dataobjects.City;
 
 public class DeviceLocation implements LocationListener {
 
 	private static final String TAG = "pingebAR-DeviceLocation";
 	
 	private LocationManager mLocationManager;
-	private Context mContext;
 	private Activity mActivity;
 	private String mProvider;
 	private OnDeviceLocationListener mListener;
 	
-	public DeviceLocation(Context context, Activity activity, OnDeviceLocationListener listener){
-		this.mContext = context;
+	public DeviceLocation(Activity activity, OnDeviceLocationListener listener){
 		this.mActivity = activity;
 		this.mListener = listener;
 	}
@@ -59,12 +50,12 @@ public class DeviceLocation implements LocationListener {
 	    if(location != null){
 	    	Log.d(TAG, "Returning last known location!");
 	    	
-	    	doGeocode(location.getLatitude(), location.getLongitude());
+	    	mListener.onLocationFound(location.getLatitude(), location.getLongitude());
 	    } else {
 	    	Log.d(TAG, "No last known location found. Requesting location updates!");
-	    	
-	    	mLocationManager.requestLocationUpdates(mProvider, 400, 1, this);
 	    }
+	    
+	    mLocationManager.requestLocationUpdates(mProvider, 400, 1, this);
 	}
 	
 	public void unsubscribe(){
@@ -78,47 +69,7 @@ public class DeviceLocation implements LocationListener {
 		double lng = location.getLongitude();
 		
 		Log.d(TAG, "Got new Location: LAT(" + String.valueOf(lat) + ") LNG(" + String.valueOf(lng) + ")");
-		doGeocode(lat, lng);
-	}
-	
-	private void doGeocode(double lat, double lng){	
-		Log.d(TAG, "Geocoding: LAT(" + String.valueOf(lat) + ") LNG(" + String.valueOf(lng) + ")");
-		Geocoder geocoder = new Geocoder(mContext, Locale.ENGLISH);
-	    
-    	List<Address> addresses;
-		try {
-			addresses = geocoder.getFromLocation(lat, lng, 1);
- 
-	    	if(addresses != null) {
-	    		String city = addresses.get(0).getSubAdminArea();
-	    		
-	    		if(city.toUpperCase().startsWith("KLAGENFURT")){
-	    			Log.i(TAG, "Geocoder returned: KLAGENFURT");
-	    			mListener.onCityFound(new City("Klagenfurt am Wörthersee", "http://pingeb.org"));
-	    		} else if(city.toUpperCase().startsWith("GRAZ")){
-	    			Log.i(TAG, "Geocoder returned: GRAZ");
-	    			mListener.onCityFound(new City("Graz", "http://graz.pingeb.org"));
-	    		} else if(city.toUpperCase().startsWith("WIEN")){
-	    			Log.i(TAG, "Geocoder returned: WIEN");
-	    			mListener.onCityFound(new City("Wien", "http://vienna.pingeb.org"));
-	    		} else if(city.toUpperCase().startsWith("VILLACH")){
-	    			Log.i(TAG, "Geocoder returned: VILLACH");
-	    			mListener.onCityFound(new City("Villach", "http://villach.pingeb.org"));
-	    		} else {
-	    			Log.i(TAG, "Geocoder returned a city without pingeb.org system! " + city);
-	    			mListener.onNoCityFound();
-	    		}
-	    	} else{
-	    		Log.w(TAG, "Geocoder returned no address!");
-	    		mListener.onError(new Exception("No Address found!"));
-	    	}
-		} catch (IOException e) {
-			Log.e(TAG, "IOException during geocoding!");
-			mListener.onError(e);
-		}
-		
-		Log.d(TAG, "Removing location updates!");
-		mLocationManager.removeUpdates(this);
+		mListener.onLocationFound(lat, lng);
 	}
 
 	@Override
