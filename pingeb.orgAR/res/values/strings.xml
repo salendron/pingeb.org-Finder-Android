@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">pingebAR</string>
-    <string name="menu_settings">Settings</string>
+    <string name="app_name">pingeb.org Finder</string>
 
     <color name="pingebYellow">#fff200</color>
+    <color name="whiteTrans1">#ffffff55</color>
+    <color name="bright">#ffffff</color>
 
-    <string name="title_locating">Lokalisierung...</string>
-    <string name="msg_no_city">Leider gibt es in deiner Stadt noch kein pingeb.org!</string>
+    <string name="contentDescMapView">Kartenansicht</string>
+    <string name="contentDescArView">Augmented Reality Ansicht</string>
+    <string name="contentDescLaunchImage">Launcher</string>
+    <string name="contentDescHelp">Hilfe</string>
+    <string name="title_activity_map_viewer">MapViewerActivity</string>
+    <string name="msg_no_gps">Für genauere Lokalisierung sollte GPS aktiviert sein!</string>
+    <string name="msg_no_location_manager">Dein gerät unterstützt den Android Location Manager leider nicht!</string>
+    <string name="contentDescNavigate">Navigieren</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_viewer">ViewerActivity</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_ar">ArActivity</string>
+    <string name="title_activity_blog">BlogActivity</string>
+    <string name="title_activity_info">InfoActivity</string>
 
 </resources>

@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/pingebYellow"
+    tools:context=".LaunchActivity" >
+    
+    <ImageView
+        android:layout_width="0sp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:src="@drawable/launch"
+        android:contentDescription="@string/contentDescLaunchImage" />
+
+    <FrameLayout
+        android:layout_width="0sp"
+	    android:layout_weight="3"
+	    android:layout_height="match_parent" >
+    
+        <ImageView android:id="@+id/imgLandLaunch"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:src="@drawable/launchimg1"
+	        android:scaleType="centerCrop"
+	        android:contentDescription="@string/contentDescLaunchImage" />
+        
+        <ProgressBar
+            android:id="@+id/pbLaunchLoading"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_gravity="top|left"
+            android:padding="5sp"/>
+        
+        <LinearLayout android:id="@+id/llControlls"
+	        android:layout_width="match_parent"
+	        android:layout_height="70sp"
+	        android:padding="0sp"
+	        android:orientation="horizontal"
+	        android:layout_gravity="bottom">
+	        
+	        <ImageButton
+	           android:id="@+id/btnStartMap"
+	           android:layout_width="0sp"
+	           android:layout_weight="2"
+	           android:layout_height="match_parent"
+	           android:layout_margin="2sp"
+	           android:src="@drawable/locationplace"
+	           android:background="@color/bright"
+	           android:contentDescription="@string/contentDescMapView" />
+	        
+	        <ImageButton
+	           android:id="@+id/btnStartAr"
+	           android:layout_width="0sp"
+	           android:layout_weight="2"
+	           android:layout_height="match_parent"
+	           android:layout_margin="2sp"
+	           android:src="@drawable/deviceaccesscamera"
+	           android:background="@color/bright"
+	           android:contentDescription="@string/contentDescArView" />
+	        
+	        <ImageButton
+	           android:id="@+id/btnStartBlog"
+	           android:layout_width="0sp"
+	           android:layout_weight="2"
+	           android:layout_height="match_parent"
+	           android:layout_margin="2sp"
+	           android:src="@drawable/locationwebsite"
+	           android:background="@color/bright"
+	           android:contentDescription="@string/contentDescArView" />
+	        
+	        <ImageButton
+	           android:id="@+id/btnAbout"
+	           android:layout_width="0sp"
+	           android:layout_weight="1"
+	           android:layout_height="match_parent"
+	           android:layout_margin="2sp"
+	           android:src="@drawable/actionhelp"
+	           android:background="@color/bright"
+	           android:contentDescription="@string/contentDescHelp" />
+	        
+	    </LinearLayout>
+    
+    </FrameLayout>
+
+    
+
+</LinearLayout>

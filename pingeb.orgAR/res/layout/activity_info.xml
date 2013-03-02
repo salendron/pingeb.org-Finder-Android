@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/pingebYellow"
+    tools:context=".InfoActivity"
+    android:padding="10sp" >
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/launch"
+        android:contentDescription="@string/contentDescLaunchImage" />
+        
+	<ScrollView
+       android:id="@+id/scrollView1"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       
+          <LinearLayout android:id="@+id/llInfo"
+            android:background="@android:color/white"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:padding="5sp" >
+     			
+              <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="pingeb.org Finder"
+		        android:textStyle="bold"
+		        android:textColor="@android:color/black"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+              
+              <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="Version: 1.0.0.0"
+		        android:textColor="@android:color/black"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+              
+              <TextView android:paddingTop="7sp"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="Über Projekt Ingeborg"
+		        android:textStyle="bold"
+		        android:textColor="@android:color/black"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+              
+              <TextView  android:id="@+id/tvInfoUrl"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="http://pingeb.org"
+		        android:textStyle="bold"
+		        android:textColor="@android:color/black"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+              
+              <TextView  android:id="@+id/tvInfoText1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textColor="@android:color/black"
+		        android:text="Im Juli 2012 verwandelte sich Klagenfurt durch eine Idee von Georg Holzer (http://www.georgholzer.at/) und Bruno Hautzenberger (http://the-engine.at/) in eine virtuelle Bibliothek. 70 knallgelbe Sticker von Projekt Ingeborg mit NFC-Tags und QR-Codes wurden in und um Klagenfurt verteilt. Jeder davon enthielt ein E-Book vom Projekt Gutenberg, das zum jeweiligen Ort passte. Im August wuchs die Zahl der Sticker auf 120 an, das Projekt wandelte sich zur kostenlosen Entdeckungsplattform für Kunstschaffende aus Klagenfurt – von Musikern und Bands bis hin zu Autoren und Fotografen. Mittlerweile gibt es auch schon Teams in Wien, Graz und Villach, welche das Projekt auch in ihren Städten umsetzen wollen." />
+     		  
+              <TextView android:paddingTop="7sp"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="Über diese App"
+		        android:textStyle="bold"
+		        android:textColor="@android:color/black"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+              
+              <TextView  android:id="@+id/tvInfoText2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textColor="@android:color/black"
+		        android:text="Diese App dient zum leichteren Auffinden der Sticker in deiner Nähe.  Über eine Map kann weltweit nach pingeb.org Stickern gesucht werden und ein Augmented Reality Viewer ermöglicht das Finden durch das Kamera-Livebild deines Geräts in einem Radius von 300 Metern. Klickt man auf einen Tag auf der Karten- oder in der AR-Ansicht öffnet sich ein Detailfenster mit Infos zu diesem Sticker. Durch einen weiteren Klick auf dieses Fenster startet dann, um den Weg zu den Stickern noch einfacher zu machen, eine Routenberechnung und man kann sich sofort zum jeweiligen Sticker navigieren lassen. Weiters sind die jeweiligen Webseiten mit Infos zu aktuellen Inhalten und den lokalen Projektteams über die App aufrufbar." />
+     			
+              <TextView android:paddingTop="7sp"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="pingeb.org Everywhere"
+		        android:textStyle="bold"
+		        android:textColor="@android:color/black"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+              
+              <TextView  android:id="@+id/tvInfoText3"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textColor="@android:color/black"
+		        android:text="Sollte es in deiner Nähe noch keine pingeb.org Sticker geben bist du herzlich dazu eingeladen das zu tun was wir getan haben und ein eigenes pingeb.org System aufzubauen! Wie das geht und was man dazu braucht erfährst du unter http://pep.pingeb.org" />
+
+          </LinearLayout>
+          
+   	</ScrollView>    
+
+</RelativeLayout>

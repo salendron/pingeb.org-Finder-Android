@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pingebYellow"
+    android:gravity="bottom"
+    tools:context=".BlogActivity" >   
+    
+    <WebView
+        android:id="@+id/wvBlog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/llControlls"
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="0sp" >
+
+        <Button
+            android:id="@+id/btnBlogKlagenfurt"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_margin="2sp"
+            android:layout_weight="1"
+            android:background="@color/bright"
+            android:drawableTop="@drawable/locationwebsite"
+            android:paddingTop="5sp"
+            android:text="Klagenfurt"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnBlogGraz"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_margin="2sp"
+            android:layout_weight="1"
+            android:background="@color/bright"
+            android:drawableTop="@drawable/locationwebsite"
+            android:paddingTop="5sp"
+            android:text="Graz"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnBlogWien"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_margin="2sp"
+            android:layout_weight="1"
+            android:background="@color/bright"
+            android:drawableTop="@drawable/locationwebsite"
+            android:paddingTop="5sp"
+            android:text="Wien"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnBlogVillach"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_margin="2sp"
+            android:layout_weight="1"
+            android:background="@color/bright"
+            android:drawableTop="@drawable/locationwebsite"
+            android:paddingTop="5sp"
+            android:text="Villach"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>
