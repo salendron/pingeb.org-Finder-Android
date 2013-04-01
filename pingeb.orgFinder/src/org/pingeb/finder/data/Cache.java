@@ -17,7 +17,7 @@ public class Cache {
 	private static final String TAG = "pingeb-Cache";
 	
 	private static final String DATABASE_NAME = "pingeb-finder-cache";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 	
 	private SQLiteDatabase database;
 	private CacheDatabase dbHelper;

@@ -63,8 +63,6 @@ public class MapViewerActivity extends FragmentActivity implements LocationListe
 		mContext = this;
 		mActivity = this;
 		
-		
-		
 		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		map.setLocationSource(this);
 		
@@ -220,12 +218,12 @@ public class MapViewerActivity extends FragmentActivity implements LocationListe
 		        .icon(BitmapDescriptorFactory
 		            .fromResource(R.drawable.pin60)));
 				
-				if(markersToShow.get(i).getGeofenceEnabled()){
+				/*if(markersToShow.get(i).getGeofenceEnabled()){
 					map.addGroundOverlay(new GroundOverlayOptions().
-				            image(getMapCircleBitmap(markersToShow.get(i).getGeofenceRadius() * 100)).
+				            image(getMapCircleBitmap(markersToShow.get(i).getGeofenceRadius())).
 				            position(markersToShow.get(i).getLatlng(),markersToShow.get(i).getGeofenceRadius()*2,markersToShow.get(i).getGeofenceRadius()*2).
 				            transparency(0.75f));
-				}
+				}*/
 			}
 		} else {
 			String system = null;
@@ -249,7 +247,7 @@ public class MapViewerActivity extends FragmentActivity implements LocationListe
 					map.addMarker(new MarkerOptions()
 			        .position(new LatLng(lat, lon))
 			        .title("pingeb.org " + system)
-			        .snippet("Zomme n�her um die einzelnen Tags zu sehen!")
+			        .snippet("Zomme näher um die einzelnen Tags zu sehen!")
 			        .icon(BitmapDescriptorFactory
 			            .fromResource(R.drawable.ic_launcher)));
 					

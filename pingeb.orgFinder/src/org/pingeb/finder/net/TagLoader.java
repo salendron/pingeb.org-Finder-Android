@@ -31,12 +31,16 @@ public class TagLoader {
 	private static boolean mLoaded = false;
 	
 	private static org.pingeb.finder.data.System[] mSystems = {
-			new org.pingeb.finder.data.System("http://dev.pingeb.org", "DEV"),
-			new org.pingeb.finder.data.System("http://pingeb.org", "Klagenfurt"),
-			new org.pingeb.finder.data.System("http://graz.pingeb.org", "Graz"),
-			new org.pingeb.finder.data.System("http://vienna.pingeb.org", "Wien"),
-			new org.pingeb.finder.data.System("http://villach.pingeb.org", "Villach")
+		new org.pingeb.finder.data.System("http://pingeb.org", "Klagenfurt"),
+		new org.pingeb.finder.data.System("http://graz.pingeb.org", "Graz")
 	};
+	
+	/*private static org.pingeb.finder.data.System[] mSystems = {
+		new org.pingeb.finder.data.System("http://pingeb.org", "Klagenfurt"),
+		new org.pingeb.finder.data.System("http://graz.pingeb.org", "Graz"),
+		new org.pingeb.finder.data.System("http://vienna.pingeb.org", "Wien"),
+		new org.pingeb.finder.data.System("http://villach.pingeb.org", "Villach")
+	};*/
 	
 	public static ArrayList<Tag> mTags = new ArrayList<Tag>();
 	

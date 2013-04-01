@@ -59,7 +59,6 @@ public class BlogActivity extends Activity {
 		btnBlogWien.startAnimation(AnimationFactory.getButtonInitAnimation());
 		btnBlogVillach.startAnimation(AnimationFactory.getButtonInitAnimation());
 		
-		btnBlogGraz.setVisibility(View.GONE);
 		btnBlogWien.setVisibility(View.GONE);
 		btnBlogVillach.setVisibility(View.GONE);
 	}
