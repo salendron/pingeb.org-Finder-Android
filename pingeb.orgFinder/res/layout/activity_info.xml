@@ -36,7 +36,7 @@
               <TextView
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:text="Version: 1.0.0.0"
+		        android:text="Version: 1.4"
 		        android:textColor="@android:color/black"
 		        android:textAppearance="?android:attr/textAppearanceSmall" />
               
@@ -60,7 +60,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:textColor="@android:color/black"
-		        android:text="Im Juli 2012 verwandelte sich Klagenfurt durch eine Idee von Georg Holzer (http://www.georgholzer.at/) und Bruno Hautzenberger (http://the-engine.at/) in eine virtuelle Bibliothek. 70 knallgelbe Sticker von Projekt Ingeborg mit NFC-Tags und QR-Codes wurden in und um Klagenfurt verteilt. Jeder davon enthielt ein E-Book vom Projekt Gutenberg, das zum jeweiligen Ort passte. Im August wuchs die Zahl der Sticker auf 120 an, das Projekt wandelte sich zur kostenlosen Entdeckungsplattform für Kunstschaffende aus Klagenfurt – von Musikern und Bands bis hin zu Autoren und Fotografen. Mittlerweile gibt es auch schon Teams in Wien, Graz und Villach, welche das Projekt auch in ihren Städten umsetzen wollen." />
+		        android:text="Im Juli 2012 verwandelte sich Klagenfurt durch eine Idee von Georg Holzer (http://www.georgholzer.at/) und Bruno Hautzenberger (http://the-engine.at/) in eine virtuelle Bibliothek. 70 knallgelbe Sticker von Projekt Ingeborg mit NFC-Tags und QR-Codes wurden in und um Klagenfurt verteilt. Jeder davon enthielt ein E-Book vom Projekt Gutenberg, das zum jeweiligen Ort passte. Im August wuchs die Zahl der Sticker auf 120 an, das Projekt wandelte sich zur kostenlosen Entdeckungsplattform für Kunstschaffende aus Klagenfurt – von Musikern und Bands bis hin zu Autoren und Fotografen. Mittlerweile gibt es pingeb.org auch schon in Graz und Villach und bald soll auch Wien folgen!" />
      		  
               <TextView android:paddingTop="7sp"
 		        android:layout_width="match_parent"

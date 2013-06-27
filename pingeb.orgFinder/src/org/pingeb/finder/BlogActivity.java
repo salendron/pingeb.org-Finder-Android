@@ -1,34 +1,45 @@
 package org.pingeb.finder;
 
-import org.pingeb.finder.animation.AnimationFactory;
-import org.pingeb.finder.net.TagLoader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-import android.os.Bundle;
+import org.pingeb.finder.animation.AnimationFactory;
+
 import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.content.Context;
+import android.os.Bundle;
+import android.text.util.Linkify;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.NavUtils;
+import at.theengine.android.simple_rss2_android.SimpleRss2Parser;
+import at.theengine.android.simple_rss2_android.SimpleRss2ParserCallback;
+import at.theengine.android.simple_rss2_android.RSSItem;
 
 public class BlogActivity extends Activity {
 
-	private Button btnBlogKlagenfurt;
-	private Button btnBlogGraz;
-	private Button btnBlogWien;
-	private Button btnBlogVillach;
-	private WebView wvBlog;
+	private static final String TAG = "pingeb-BlogActivity";
+	
+	private LinearLayout llLoading;
+	private ListView lvFeedItems;
+	
+	private List<RSSItem> allItems;
+	private int feedCount;
+	
+	private Context mContext;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,83 +47,206 @@ public class BlogActivity extends Activity {
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_blog);
 		
+		mContext = this;
+		
+		feedCount = 0;
+		allItems = new ArrayList<RSSItem>();
+		
 		initViews();
-		addButtonClickEvents();
+		loadRSS();
 	}
 	
-	private void initViews(){
-		btnBlogKlagenfurt = (Button) findViewById(R.id.btnBlogKlagenfurt);
-		btnBlogGraz = (Button) findViewById(R.id.btnBlogGraz);
-		btnBlogWien = (Button) findViewById(R.id.btnBlogWien);
-		btnBlogVillach = (Button) findViewById(R.id.btnBlogVillach);
-		
-		wvBlog = (WebView) findViewById(R.id.wvBlog);
-		browse(TagLoader.getSystems()[0].getUrl());
+	private void initViews(){		
+		lvFeedItems = (ListView) findViewById(R.id.lvFeedItems);
+		llLoading = (LinearLayout) findViewById(R.id.llLoading);
+		lvFeedItems.setVisibility(View.GONE);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
-		btnBlogKlagenfurt.startAnimation(AnimationFactory.getButtonInitAnimation());
-		btnBlogGraz.startAnimation(AnimationFactory.getButtonInitAnimation());
-		btnBlogWien.startAnimation(AnimationFactory.getButtonInitAnimation());
-		btnBlogVillach.startAnimation(AnimationFactory.getButtonInitAnimation());
-		
-		btnBlogWien.setVisibility(View.GONE);
-		btnBlogVillach.setVisibility(View.GONE);
 	}
 	
-	private void addButtonClickEvents(){
-		btnBlogKlagenfurt.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				btnBlogKlagenfurt.startAnimation(AnimationFactory.getButtonClickAnimation());
-				browse(TagLoader.getSystems()[0].getUrl());
-			}
-		});
-
-		btnBlogGraz.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				btnBlogGraz.startAnimation(AnimationFactory.getButtonClickAnimation());
-				browse(TagLoader.getSystems()[1].getUrl());
-			}
-		});
-
-		btnBlogWien.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				btnBlogWien.startAnimation(AnimationFactory.getButtonClickAnimation());
-				browse(TagLoader.getSystems()[2].getUrl());
-			}
-		});
-
-		btnBlogVillach.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				btnBlogVillach.startAnimation(AnimationFactory.getButtonClickAnimation());
-				browse(TagLoader.getSystems()[3].getUrl());
-			}
-		});
+	@Override
+	protected void onPause() {
+		super.onPause();
 	}
 	
-	private void browse(String url){
-		wvBlog.getSettings().setJavaScriptEnabled(true);
-
-		 final Activity activity = this;
-		 wvBlog.setWebChromeClient(new WebChromeClient() {
-		   public void onProgressChanged(WebView view, int progress) {
-		     activity.setProgress(progress * 1000);
-		   }
-		 });
-		 wvBlog.setWebViewClient(new WebViewClient() {
-		   public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-		     Toast.makeText(activity, "Oh no! " + description, Toast.LENGTH_SHORT).show();
-		   }
-		 });
-
-		 wvBlog.loadUrl(url);
+	private void initRSSLoaderCallback(){
+		/*mCallback = new RSSLoaderCallback() {
+			
+			@Override
+			public void onRSSLoaded() {
+				Log.d(TAG,"onRSSLoaded: Loaded " + String.valueOf(RSSLoader.getItems().size()) + " RSS Items!");
+				
+				for(int i = 0; i < RSSLoader.getItems().size(); i++){
+					Log.d(TAG, RSSLoader.getItems().get(i).getTimestamp() + " - " + RSSLoader.getItems().get(i).getTitle());
+				}
+				
+				lvFeedItems.setAdapter(new RSSListAdapter(mContext,R.layout.rss_list_item, RSSLoader.getItems()));
+			}
+			
+			@Override
+			public void onError(Exception ex) {
+				Log.e(TAG,"onError (RSS): " + ex.getMessage());
+			}
+		};*/
 	}
+	
+	private void loadRSS(){
+		SimpleRss2Parser parserKlu = new SimpleRss2Parser("http://pingeb.org/feed", 
+			    new SimpleRss2ParserCallback() {
+			        @Override
+			        public void onFeedParsed(List<RSSItem> items) {
+			            for(int i = 0; i < items.size(); i++){
+			                items.get(i).setContent("Klagenfurt");
+			                
+			                try {
+			                    SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss z",Locale.US);
+			                    Date date = sdf.parse(items.get(i).getDate());
+
+			                    items.get(i).setDate(String.valueOf(date.getTime()));
+							} catch (ParseException e) {
+								items.get(i).setDate("Datum konnte nicht ausgelesen werden!");
+							}
+			            }
+			            
+			            displayFeed(items);
+			        }
+			        @Override
+			        public void onError(Exception ex) {
+			            Toast.makeText(mContext, ex.getMessage(), Toast.LENGTH_SHORT).show();
+			        }
+			    }
+			);
+			parserKlu.parseAsync();
+			
+			SimpleRss2Parser parserGraz = new SimpleRss2Parser("http://graz.pingeb.org/feed", 
+				    new SimpleRss2ParserCallback() {
+				        @Override
+				        public void onFeedParsed(List<RSSItem> items) {
+				            for(int i = 0; i < items.size(); i++){
+				                items.get(i).setContent("Graz");
+				                
+				                try {
+				                    SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss z",Locale.US);
+				                    Date date = sdf.parse(items.get(i).getDate());
+
+				                    items.get(i).setDate(String.valueOf(date.getTime()));
+								} catch (ParseException e) {
+									items.get(i).setDate("Datum konnte nicht ausgelesen werden!");
+								}
+				            }
+				            
+				            displayFeed(items);
+				        }
+				        @Override
+				        public void onError(Exception ex) {
+				            Toast.makeText(mContext, ex.getMessage(), Toast.LENGTH_SHORT).show();
+				        }
+				    }
+				);
+			parserGraz.parseAsync();
+			
+			SimpleRss2Parser parserVl = new SimpleRss2Parser("http://villach.pingeb.org/feed", 
+				    new SimpleRss2ParserCallback() {
+				        @Override
+				        public void onFeedParsed(List<RSSItem> items) {
+				            for(int i = 0; i < items.size(); i++){
+				                items.get(i).setContent("Villach");
+				                
+				                try {
+				                    SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss z",Locale.US);
+				                    Date date = sdf.parse(items.get(i).getDate());
+
+				                    items.get(i).setDate(String.valueOf(date.getTime()));
+								} catch (ParseException e) {
+									items.get(i).setDate("Datum konnte nicht ausgelesen werden!");
+								}
+				            }
+				            
+				            displayFeed(items);
+				        }
+				        @Override
+				        public void onError(Exception ex) {
+				            Toast.makeText(mContext, ex.getMessage(), Toast.LENGTH_SHORT).show();
+				            
+				            displayFeed(null);
+				        }
+				    }
+				);
+			parserVl.parseAsync();
+	}
+	
+	private void displayFeed(List<RSSItem> items){
+		if(items != null){
+			allItems.addAll(items);
+		}
+		
+		feedCount++;
+		
+		if(feedCount == 3){
+			Collections.sort(allItems);
+			lvFeedItems.setAdapter(new RSSListAdapter(mContext,R.layout.rss_list_item, allItems));
+			AnimationFactory.doFadeAnimation(llLoading, lvFeedItems, mContext);
+		}
+	}
+	
+	
+	
+	private class RSSListAdapter extends ArrayAdapter<RSSItem> {
+
+        private ArrayList<RSSItem> items;
+        private Context ctx;
+        private int layout;
+
+        public RSSListAdapter(Context context, int layout, List<RSSItem> items) {
+                super(context, layout, items);
+                this.items = (ArrayList<RSSItem>) items;
+                this.ctx = context;
+                this.layout = layout;
+        }
+        
+        public View getView(int position, View convertView, ViewGroup parent) {
+                View v = convertView;
+                if (v == null) {
+                    LayoutInflater vi = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v = vi.inflate(layout, null);
+                }
+                
+                RSSItem o = items.get(position);
+                if (o != null) {
+                	TextView tvSystem = ((TextView) v.findViewById(R.id.tvSystem));
+                	TextView tvTitle = ((TextView) v.findViewById(R.id.tvTitle));
+                	TextView tvDescription = ((TextView) v.findViewById(R.id.tvDescription));
+                	TextView tvLnk = ((TextView) v.findViewById(R.id.tvLnk));
+                	
+                	if (tvSystem != null) {
+                		String date = o.getDate();
+                		
+                		try{
+                			date = new Date(Long.parseLong(o.getDate())).toLocaleString();
+                		} catch (Exception ex) {}
+                		
+                		tvSystem.setText(o.getContent() + " - " + date);
+                    }
+                	
+                	if (tvTitle != null) {
+                		tvTitle.setText(o.getTitle());
+                    }
+                	
+                	if (tvDescription != null) {
+                    	tvDescription.setText(o.getDescription());
+                    }
+                	
+                	if (tvLnk != null) {
+                    	tvLnk.setText("weiterlesen: " + o.getLink());
+                    	Linkify.addLinks(tvLnk, Linkify.ALL);
+                    }
+                }
+                
+                return v;
+        }
+    }
 
 }

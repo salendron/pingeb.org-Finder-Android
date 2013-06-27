@@ -45,7 +45,7 @@ public class CacheDatabase extends SQLiteOpenHelper {
 	private static final String DATABASE_TABLE_TAG = "create table "
 			+ TABLE_TAG + "(" 
 			+ TAG_ID + " integer primary key autoincrement, " 
-			+ TAG_SYSTEM + " integer not null, "
+			+ TAG_SYSTEM + " int not null, "
 			+ TAG_PINGEB_ID + " integer not null, "
 			+ TAG_NAME + " text not null, "
 			+ TAG_CLICKS + " integer not null, "

@@ -1,73 +1,43 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pingebYellow"
-    android:gravity="bottom"
-    tools:context=".BlogActivity" >   
+    android:orientation="vertical"
+    tools:context=".BlogActivity" >
     
-    <WebView
-        android:id="@+id/wvBlog"
+    <ListView
+        android:id="@+id/lvFeedItems"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <LinearLayout
-        android:id="@+id/llControlls"
-        android:layout_width="match_parent"
-        android:layout_height="70sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:gravity="bottom"
-        android:orientation="horizontal"
-        android:padding="0sp" >
-
-        <Button
-            android:id="@+id/btnBlogKlagenfurt"
-            android:layout_width="0sp"
-            android:layout_height="match_parent"
-            android:layout_margin="2sp"
-            android:layout_weight="1"
-            android:background="@color/bright"
-            android:drawableTop="@drawable/locationwebsite"
-            android:paddingTop="5sp"
-            android:text="Klagenfurt"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btnBlogGraz"
-            android:layout_width="0sp"
-            android:layout_height="match_parent"
-            android:layout_margin="2sp"
-            android:layout_weight="1"
-            android:background="@color/bright"
-            android:drawableTop="@drawable/locationwebsite"
-            android:paddingTop="5sp"
-            android:text="Graz"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btnBlogWien"
-            android:layout_width="0sp"
-            android:layout_height="match_parent"
-            android:layout_margin="2sp"
-            android:layout_weight="1"
-            android:background="@color/bright"
-            android:drawableTop="@drawable/locationwebsite"
-            android:paddingTop="5sp"
-            android:text="Wien"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btnBlogVillach"
-            android:layout_width="0sp"
-            android:layout_height="match_parent"
-            android:layout_margin="2sp"
-            android:layout_weight="1"
-            android:background="@color/bright"
-            android:drawableTop="@drawable/locationwebsite"
-            android:paddingTop="5sp"
-            android:text="Villach"
-            android:textStyle="bold" />
+        android:layout_height="0sp"
+        android:background="#FFFFFF"
+        android:divider="@color/pingebYellow"
+        android:layout_weight="1">
+    </ListView>
+    
+    <LinearLayout android:id="@+id/llLoading"
+	    android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1" 
+        android:background="@color/pingebYellow"
+        android:layout_marginBottom="2sp"
+	    android:orientation="vertical"
+	    android:gravity="center_vertical|center_horizontal">
+	    
+        <TextView
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:textStyle="bold"
+	       android:textColor="#000000"
+	       android:layout_marginTop="2sp"
+	       android:paddingBottom="20sp"
+	       android:text="Lade Neuigkeiten..."
+	       android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <ProgressBar
+          android:layout_width="30sp"
+          android:layout_height="30sp" />
+	    
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

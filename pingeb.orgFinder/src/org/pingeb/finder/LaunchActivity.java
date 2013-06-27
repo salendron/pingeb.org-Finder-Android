@@ -37,6 +37,7 @@ public class LaunchActivity extends Activity {
 	private Random randomGenerator;
 	
 	private TagLoaderCallback mLoaderCallback;
+	
 	private boolean initialized = false;
 	
 	@Override

@@ -32,7 +32,8 @@ public class TagLoader {
 	
 	private static org.pingeb.finder.data.System[] mSystems = {
 		new org.pingeb.finder.data.System("http://pingeb.org", "Klagenfurt"),
-		new org.pingeb.finder.data.System("http://graz.pingeb.org", "Graz")
+		new org.pingeb.finder.data.System("http://graz.pingeb.org", "Graz"),
+		new org.pingeb.finder.data.System("http://villach.pingeb.org", "Villach")
 	};
 	
 	/*private static org.pingeb.finder.data.System[] mSystems = {
@@ -92,19 +93,6 @@ public class TagLoader {
 				return null;
 			}
 		};
-		
-		/*
-		 * //---use the LocationManager class to obtain locations data---
-lm = (LocationManager)
-getSystemService(Context.LOCATION_SERVICE);
-//---PendingIntent to launch activity if the user is within some locations---
-PendingIntent pendIntent = PendingIntent.getActivity(
-this, 0, new
-Intent(android.content.Intent.ACTION_VIEW,
-Uri.parse("http://www.amazon.com")), 0);
-lm.addProximityAlert(37.422006, -122.084095, 5, -1, pendIntent);
-		 * 
-		 */
 		
 		task.execute();
 	}
